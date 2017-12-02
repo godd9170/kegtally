@@ -1,5 +1,5 @@
 """
-Django settings for boiler project on Heroku. For more info, see:
+Django settings for kegtally project on Heroku. For more info, see:
 https://github.com/heroku/heroku-django-template
 
 For more information on this file, see
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'boiler.urls'
+ROOT_URLCONF = 'kegtally.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'boiler.wsgi.application'
+WSGI_APPLICATION = 'kegtally.wsgi.application'
 
 
 # Database

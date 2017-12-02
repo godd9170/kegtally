@@ -1,4 +1,4 @@
-## dj-boiler
+## kegtally
 
 ## Django Rest Framework
 

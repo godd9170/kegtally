@@ -1,1 +1,1 @@
-web: gunicorn boiler.wsgi
+web: gunicorn kegtally.wsgi
