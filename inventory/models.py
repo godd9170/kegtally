@@ -1,19 +1,6 @@
 import uuid
 from django.db import models
-from inventory.fields import AutoCreatedField, AutoLastModifiedField
-from django.utils.translation import ugettext_lazy as _
-
-
-class TimeStampedModel(models.Model):
-    """
-    An abstract base class model that provides self-updating
-    ``created`` and ``modified`` fields.
-    """
-    created = AutoCreatedField(_('created'))
-    modified = AutoLastModifiedField(_('modified'))
-
-    class Meta:
-        abstract = True
+from common.models import TimeStampedModel
 
 
 class Keg(TimeStampedModel):
@@ -44,6 +31,7 @@ class Fill(TimeStampedModel):
         'inventory.Keg', related_name='keg')
     batch = models.ForeignKey(
         'inventory.Batch', related_name='batch')
+    qbid = models.IntegerField(null=True)  # Link to the qb child item id
 
     def __str__(self):
         return "{}L - {}".format(str(self.keg.litres), str(self.batch.beer.name))
@@ -79,6 +67,8 @@ class Beer(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)  # The unique id of the beer
     name = models.CharField(max_length=100)
+    # Link to the quickbooks parent item Id
+    qbid = models.IntegerField(null=True)
 
     def __str__(self):
         return "{}".format(str(self.name))

@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-import inventory.fields
+import common.fields
 import uuid
 
 
@@ -19,9 +19,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Batch',
             fields=[
-                ('created', inventory.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', inventory.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('created', common.fields.AutoCreatedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='created')),
+                ('modified', common.fields.AutoLastModifiedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('id', models.UUIDField(default=uuid.uuid4,
+                                        editable=False, primary_key=True, serialize=False)),
                 ('litres', models.IntegerField(default=1000)),
             ],
             options={
@@ -33,9 +36,12 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Beer',
             fields=[
-                ('created', inventory.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', inventory.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
+                ('created', common.fields.AutoCreatedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='created')),
+                ('modified', common.fields.AutoLastModifiedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('id', models.UUIDField(default=uuid.uuid4,
+                                        editable=False, primary_key=True, serialize=False)),
                 ('name', models.TextField(blank=True, default='')),
             ],
             options={
@@ -47,16 +53,19 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='keg',
             name='litres',
-            field=models.IntegerField(choices=[(50, '50 Litres'), (30, '30 Litres'), (20, '20 Litres')], default=50),
+            field=models.IntegerField(
+                choices=[(50, '50 Litres'), (30, '30 Litres'), (20, '20 Litres')], default=50),
         ),
         migrations.AddField(
             model_name='batch',
             name='beer',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='beer', to='inventory.Beer'),
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, related_name='beer', to='inventory.Beer'),
         ),
         migrations.AddField(
             model_name='keg',
             name='batch',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='batch', to='inventory.Batch'),
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, related_name='batch', to='inventory.Batch'),
         ),
     ]

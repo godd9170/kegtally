@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.timezone
-import inventory.fields
+import common.fields
 import uuid
 
 
@@ -19,10 +19,14 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Fill',
             fields=[
-                ('created', inventory.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', inventory.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('batch', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='batch', to='inventory.Batch')),
+                ('created', common.fields.AutoCreatedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='created')),
+                ('modified', common.fields.AutoLastModifiedField(
+                    default=django.utils.timezone.now, editable=False, verbose_name='modified')),
+                ('id', models.UUIDField(default=uuid.uuid4,
+                                        editable=False, primary_key=True, serialize=False)),
+                ('batch', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
+                                            related_name='batch', to='inventory.Batch')),
             ],
             options={
                 'verbose_name': 'keg fill',
@@ -37,6 +41,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='fill',
             name='keg',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='keg', to='inventory.Keg'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, related_name='keg', to='inventory.Keg'),
         ),
     ]
