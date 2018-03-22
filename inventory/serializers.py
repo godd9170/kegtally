@@ -2,13 +2,6 @@ from rest_framework import serializers
 from inventory.models import Fill, Keg, Batch, Beer
 
 
-class KegSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Keg
-        fields = ('id', 'litres', 'created')
-
-
 class BeerSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -21,7 +14,21 @@ class BatchSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Batch
-        fields = ('litres', 'beer', 'created')
+        fields = ('id', 'litres', 'beer', 'created')
+
+
+class KegSerializer(serializers.ModelSerializer):
+    status = serializers.SerializerMethodField()
+
+    def get_status(self, keg):
+        try:
+            return Fill.objects.get(keg=keg.id).batch.beer.name
+        except:
+            return None
+
+    class Meta:
+        model = Keg
+        fields = ('id', 'litres', 'status', 'created')
 
 
 class FillSerializer(serializers.ModelSerializer):
