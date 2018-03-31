@@ -1,1 +1,1 @@
-web: gunicorn kegtally.wsgi
+web: gunicorn kegtally.kegtally.wsgi
