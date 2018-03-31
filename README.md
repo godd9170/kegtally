@@ -1,14 +1,28 @@
-## kegtally
+# kegtally
 
-## Django Rest Framework
+## Getting Started
 
-## Linter
+1.  get `pipenv`
 
-`pylint`
+```
+brew install pipenv
+```
 
-## Deployment to Heroku
+2.  make a new virtualenv
 
-    $ git push heroku master
-    $ heroku run python manage.py migrate
+```
+pipenv --three
+```
 
-Built from Heroku Django Starter Template
+3.  install all the requirements
+
+```
+pipenv install
+```
+
+4.  start up the server
+
+```
+pipenv shell
+python manage.py runserver
+```
