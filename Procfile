@@ -1,1 +1,1 @@
-web: gunicorn kegtally.kegtally.wsgi --log-file -
+web: gunicorn kegtally.wsgi --log-file -
