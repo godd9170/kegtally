@@ -39,11 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'graphene_django',
+    'corsheaders',
     'common',
     'inventory'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # allow cors
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,9 +125,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# CORS
+CORS_ORIGIN_WHITELIST = ('localhost:3000', )
+CORS_ALLOW_METHODS = (
+    'GET',
+    'OPTIONS',
+    'POST',
+)
+
+# Graphene
 GRAPHENE = {
     'SCHEMA': 'kegtally.schema.schema',
 }
 
-# Activate Django-Heroku.
+# Heroku
 django_heroku.settings(locals())
