@@ -2,27 +2,8 @@ import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError
 from django.db.models import Q
-from inventory.models import Keg, Fill, Batch, Beer
-
-
-class KegType(DjangoObjectType):
-    class Meta:
-        model = Keg
-
-
-class FillType(DjangoObjectType):
-    class Meta:
-        model = Fill
-
-
-class BatchType(DjangoObjectType):
-    class Meta:
-        model = Batch
-
-
-class BeerType(DjangoObjectType):
-    class Meta:
-        model = Beer
+from inventory.types import KegType, FillType, BatchType, BeerType
+from inventory.mutations import CreateKeg
 
 
 class Query(graphene.ObjectType):
@@ -42,3 +23,7 @@ class Query(graphene.ObjectType):
 
     def resolve_beers(self, info, **kwargs):
         return Beer.objects.all()
+
+
+class Mutation(graphene.ObjectType):
+    create_keg = CreateKeg.Field()

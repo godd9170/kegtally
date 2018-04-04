@@ -4,7 +4,7 @@ from .models import Keg, Fill, Batch, Beer
 
 @admin.register(Keg)
 class KegAdmin(admin.ModelAdmin):
-    list_display = ('id', 'litres', 'created')
+    list_display = ('id', 'tag', 'litres', 'created')
     list_per_page = 20
 
 

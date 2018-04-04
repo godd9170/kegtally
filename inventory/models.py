@@ -11,6 +11,7 @@ class Keg(TimeStampedModel):
                           editable=False)  # The unique id of the keg
     litres = models.IntegerField(choices=[(
         50, '50 Litres'), (30, '30 Litres'), (20, '20 Litres')], default=50)
+    tag = models.CharField(max_length=100, unique=True, null=True)
 
     def __str__(self):
         return "{}".format(str(self.id))
