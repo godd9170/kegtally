@@ -16,10 +16,8 @@ class FillType(DjangoObjectType):
 class BatchType(DjangoObjectType):
     class Meta:
         model = Batch
-        interfaces = (graphene.relay.Node, )
 
 
 class BeerType(DjangoObjectType):
     class Meta:
         model = Beer
-        interfaces = (graphene.relay.Node, )
