@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'kegtally.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'kegtally',
+        'USER': os.environ['KEGTALLY_DATABASE_USER'],
+        'PASSWORD': os.environ['KEGTALLY_DATABASE_PASSWORD'],
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
