@@ -20,7 +20,21 @@ pipenv --three
 pipenv install
 ```
 
-4.  start up the server
+4.  setup postgres
+
+```
+psql
+CREATE DATABASE kegtally;
+```
+
+5.  setup db credentials
+
+```
+export KEGTALLY_DATABASE_USER=<user>
+export KEGTALLY_DATABASE_PASSWORD=<password>
+```
+
+6.  start up the server
 
 ```
 pipenv shell
