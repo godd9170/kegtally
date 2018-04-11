@@ -79,17 +79,17 @@ WSGI_APPLICATION = 'kegtally.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'kegtally',
-        'USER': os.environ['KEGTALLY_DATABASE_USER'],
-        'PASSWORD': os.environ['KEGTALLY_DATABASE_PASSWORD'],
-        'HOST': 'localhost',
-        'PORT': '5432',
+if not os.environ.get('DYNO'):  # no dyno? means we're local
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'kegtally',
+            'USER': os.environ['KEGTALLY_DATABASE_USER'],
+            'PASSWORD': os.environ['KEGTALLY_DATABASE_PASSWORD'],
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
 
 
 # Password validation
