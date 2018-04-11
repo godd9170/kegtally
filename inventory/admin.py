@@ -10,7 +10,7 @@ class KegAdmin(admin.ModelAdmin):
 
 @admin.register(Fill)
 class FillAdmin(admin.ModelAdmin):
-    list_display = ('id', 'created', 'keg')
+    list_display = ('id', 'created', 'keg', 'customer', 'batch')
     list_per_page = 20
 
 

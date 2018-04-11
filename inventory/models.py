@@ -29,11 +29,25 @@ class Fill(TimeStampedModel):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)  # The unique id of the keg
     batch = models.ForeignKey(
-        'inventory.Batch', related_name='batch', on_delete=models.CASCADE)
+        'inventory.Batch',
+        related_name='fills',
+        related_query_name='fill',
+        on_delete=models.CASCADE,
+    )
     customer = models.ForeignKey(
-        'accounting.Customer', related_name='customer', blank=True, null=True, on_delete=models.CASCADE)
+        'accounting.Customer',
+        related_name='fills',
+        related_query_name='fill',
+        blank=True, null=True,
+        on_delete=models.CASCADE,
+    )
     keg = models.ForeignKey(
-        'inventory.Keg', related_name='keg', on_delete=models.CASCADE, null=True)
+        'inventory.Keg',
+        related_name='fills',
+        related_query_name='fill',
+        on_delete=models.CASCADE,
+        null=True,
+    )
     qbid = models.IntegerField(null=True)  # Link to the qb child item id
 
     def __str__(self):
@@ -49,11 +63,19 @@ class Batch(TimeStampedModel):
     """
     Represents a completed batch of beer
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          editable=False)  # The unique id of the batch
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     litres = models.IntegerField(default=1000)
     beer = models.ForeignKey(
-        'inventory.Beer', related_name='beer', null=True, on_delete=models.CASCADE)
+        'inventory.Beer',
+        related_name='batches',
+        related_query_name='batch',
+        null=True,
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return "{} - {}".format(str(self.beer.name), str(self.created))
@@ -68,8 +90,11 @@ class Beer(TimeStampedModel):
     """
     Represents a variety of beer that is produced
     """
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4,
-                          editable=False)  # The unique id of the beer
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
     name = models.CharField(max_length=100)
     # Link to the quickbooks parent item Id
     qbid = models.IntegerField(null=True)

@@ -24,11 +24,11 @@ class Query(graphene.ObjectType):
         return Fill.objects.all()
 
     def resolve_batches(self, info, **kwargs):
-        return Batch.objects.all()
+        return Batch.objects.annotate(total_count=Count('id'))
 
     def resolve_beers(self, info, **kwargs):
         # return Beer.objects.all()
-        return Beer.objects.annotate(num_batches=Count('batch'))
+        return Beer.objects.all()
 
 
 class Mutation(graphene.ObjectType):
