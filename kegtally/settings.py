@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'graphene_django',
     'corsheaders',
     'common',
-    'inventory'
+    'inventory',
+    'accounting',
 ]
 
 MIDDLEWARE = [

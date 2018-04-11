@@ -1,7 +1,7 @@
 import graphene
 from graphene_django import DjangoObjectType
 from graphql import GraphQLError
-from django.db.models import Q
+from django.db.models import Q, Count
 from inventory.types import KegType, FillType, BatchType, BeerType
 from inventory.models import Keg, Fill, Batch, Beer
 from inventory.mutations import CreateKeg
@@ -27,7 +27,8 @@ class Query(graphene.ObjectType):
         return Batch.objects.all()
 
     def resolve_beers(self, info, **kwargs):
-        return Beer.objects.all()
+        # return Beer.objects.all()
+        return Beer.objects.annotate(num_batches=Count('batch'))
 
 
 class Mutation(graphene.ObjectType):

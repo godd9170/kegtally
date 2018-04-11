@@ -12,8 +12,6 @@ class Keg(TimeStampedModel):
     litres = models.IntegerField(choices=[(
         50, '50 Litres'), (30, '30 Litres'), (20, '20 Litres')], default=50)
     tag = models.CharField(max_length=100, unique=True, null=True)
-    fill = models.ForeignKey(
-        'inventory.Fill', related_name='fill', on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return "{}".format(str(self.id))
@@ -30,10 +28,12 @@ class Fill(TimeStampedModel):
     """
     id = models.UUIDField(primary_key=True, default=uuid.uuid4,
                           editable=False)  # The unique id of the keg
-    keg = models.ForeignKey(
-        'inventory.Keg', related_name='keg', on_delete=models.CASCADE)
     batch = models.ForeignKey(
         'inventory.Batch', related_name='batch', on_delete=models.CASCADE)
+    customer = models.ForeignKey(
+        'accounting.Customer', related_name='customer', null=True, on_delete=models.CASCADE)
+    keg = models.ForeignKey(
+        'inventory.Keg', related_name='keg', on_delete=models.CASCADE, null=True)
     qbid = models.IntegerField(null=True)  # Link to the qb child item id
 
     def __str__(self):
