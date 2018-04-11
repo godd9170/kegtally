@@ -31,7 +31,7 @@ class Fill(TimeStampedModel):
     batch = models.ForeignKey(
         'inventory.Batch', related_name='batch', on_delete=models.CASCADE)
     customer = models.ForeignKey(
-        'accounting.Customer', related_name='customer', null=True, on_delete=models.CASCADE)
+        'accounting.Customer', related_name='customer', blank=True, null=True, on_delete=models.CASCADE)
     keg = models.ForeignKey(
         'inventory.Keg', related_name='keg', on_delete=models.CASCADE, null=True)
     qbid = models.IntegerField(null=True)  # Link to the qb child item id
