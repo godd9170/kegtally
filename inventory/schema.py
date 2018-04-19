@@ -5,6 +5,7 @@ from django.db.models import Q, Count
 from inventory.types import KegType, FillType, BatchType, BeerType
 from inventory.models import Keg, Fill, Batch, Beer
 from inventory.mutations import CreateKeg
+from inventory.queries import get_beers
 
 
 class Query(graphene.ObjectType):
@@ -27,8 +28,7 @@ class Query(graphene.ObjectType):
         return Batch.objects.annotate(total_count=Count('id'))
 
     def resolve_beers(self, info, **kwargs):
-        # return Beer.objects.all()
-        return Beer.objects.all()
+        return get_beers()
 
 
 class Mutation(graphene.ObjectType):

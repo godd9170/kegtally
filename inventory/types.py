@@ -4,6 +4,7 @@ from inventory.models import Keg, Fill, Batch, Beer
 
 
 class KegType(DjangoObjectType):
+
     class Meta:
         model = Keg
 
@@ -18,6 +19,8 @@ class BatchType(DjangoObjectType):
         model = Batch
 
 
-class BeerType(DjangoObjectType):
-    class Meta:
-        model = Beer
+class BeerType(graphene.ObjectType):
+    name = graphene.String()
+    fifty_count = graphene.Int()
+    thirty_count = graphene.Int()
+    twenty_count = graphene.Int()
